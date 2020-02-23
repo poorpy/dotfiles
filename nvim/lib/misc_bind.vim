@@ -15,7 +15,7 @@ nnoremap <A-l> <C-w>l
 nnoremap <leader>m :Magit<CR>
 nnoremap <leader>f :FuzzyOpen<CR>
 nnoremap <leader>g :FuzzyGrep<CR>
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>n :Explore<CR>
 nnoremap <C-n> :Explore<CR>
 
 inoremap jj <Esc>

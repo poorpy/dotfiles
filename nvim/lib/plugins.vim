@@ -38,12 +38,5 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 
   Plug 'alx741/vim-stylishask'
-
-  " Plug 'Olical/vim-scheme', { 'for': 'scheme', 'on': 'SchemeConnect' }
-  " Plug 'guns/vim-sexp'
-  " Plug 'tpope/vim-sexp-mappings-for-regular-people'
-  " Plug 'jreybert/vimagit'
-  " Plug 'w0rp/ale'
-
   
 call plug#end()

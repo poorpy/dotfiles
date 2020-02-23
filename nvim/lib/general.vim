@@ -17,7 +17,6 @@ set shortmess+=c
 
 set updatetime=300
 
-
 set encoding=utf-8
 set ignorecase
 set smartcase
@@ -29,7 +28,6 @@ set mouse=a
 
 set cursorline
 set completeopt-=preview
-" set completeopt=noinsert,menuone,noselect
 
 set signcolumn=yes
 
