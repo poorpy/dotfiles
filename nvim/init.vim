@@ -84,7 +84,7 @@ nnoremap <leader>n :Explore<CR>
 inoremap jj <Esc>
 " }}}
 
-" Plugins and plugin management {{{ 
+" plugins {{{ 
 call plug#begin('~/.local/share/nvim/plugged/')
 
 " tpope {{{
@@ -93,6 +93,7 @@ call plug#begin('~/.local/share/nvim/plugged/')
   Plug 'tpope/vim-vinegar'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-repeat'
 " }}}
 
 " language packs, vim frameworks {{{
@@ -128,6 +129,7 @@ endfunction
   Plug 'justinmk/vim-sneak'
   Plug 'jiangmiao/auto-pairs'
   Plug 'tyru/open-browser.vim'
+  Plug 'terryma/vim-multiple-cursors'
 
 let g:sneak#label =1
 nnoremap <leader>f :FuzzyOpen<CR>
@@ -144,6 +146,20 @@ nnoremap <leader>g :FuzzyGrep<CR>
 "" }}}
 
 call plug#end()
+" }}}
+
+" multiple cursors settings {{{
+let g:multi_cursor_use_default_mapping=0
+
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
 " }}}
 
 " ultisnips {{{
