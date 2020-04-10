@@ -1,6 +1,6 @@
 #!/bin/env zsh
 
-export EDITOR='nvim'
+export EDITOR='nvr --remote'
 export READER='zathura'
 
 export PATH=$PATH:/home/poorpy/.bin:/home/poorpy/.cargo/bin

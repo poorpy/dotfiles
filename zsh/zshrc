@@ -12,8 +12,8 @@ compinit
 # End of lines added by compinstall
 # export EDITOR='nvim'
 # export READER='zathura'
-(cat ~/.cache/wal/sequences &)
-source ~/.cache/wal/colors-tty.sh
+# (cat ~/.cache/wal/sequences &)
+# source ~/.cache/wal/colors-tty.sh
 
 # alias grep='grep --color=auto'
 # alias ls='ls --color=auto'
