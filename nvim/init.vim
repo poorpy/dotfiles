@@ -77,6 +77,16 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
+" use alt + shift + jk to swap tabs 
+tnoremap <A-J> <C-\><C-N>gT
+tnoremap <A-K> <C-\><C-N>gt
+inoremap <A-J> <C-\><C-N>gT
+inoremap <A-K> <C-\><C-N>gt
+nnoremap <A-J> gT
+nnoremap <A-K> gt
+
+
+
 " open netrw 
 nnoremap <leader>n :Explore<CR>
 
