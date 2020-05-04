@@ -1,0 +1,283 @@
+####
+####
+####
+
+set $mod Mod4
+set $term alacritty
+set $editor nvim
+font pango:SauceCodePro Nerd Font Black 10
+
+focus_follows_mouse no
+mouse_warping none
+
+# i3 gaps
+for_window [class="^.*"] border pixel 3
+gaps inner 10
+gaps outer 5
+smart_gaps on
+smart_borders on
+
+# mouse+$mod to drag window
+floating_modifier $mod
+
+# define workspace names
+workspace 1 output HDMI1 HDMI-1 eDP1
+workspace 2 output HDMI1 HDMI-1 eDP1
+workspace 3 output HDMI1 HDMI-1 eDP1
+workspace 4 output HDMI1 HDMI-1 eDP1
+workspace 5 output HDMI1 HDMI-1 eDP1
+workspace 6 output HDMI1 HDMI-1 eDP1
+workspace 7 output eDP1
+workspace 8 output eDP1
+workspace 9 output eDP1
+workspace 10 output eDP1
+set $ws1 "1" 
+set $ws2 "2" 
+set $ws3 "3" 
+set $ws4 "4" 
+set $ws5 "5" 
+set $ws6 "6" 
+set $ws7 "7" 
+set $ws8 "8" 
+set $ws9 "9" 
+set $ws10 "10"
+
+# i3blocks settings
+bar {
+	font pango: Source code pro 10
+        status_command i3blocks
+	position top
+	mode dock
+	tray_output primary
+}
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+# disable screen going off
+exec_always xset s off && xset -dpms
+exec_always xset -b
+# exec --no-startup-id wal -R
+# exec --no-startup-id blueberry-tray
+# restore wallpaper
+exec_always --no-startup-id betterlockscreen -w
+exec --no-startup-id udiskie --tray
+# exec --no-startup-id compton --xrender-sync-fence -b --config ~/.compton.conf
+exec_always --no-startup-id autoxrandr
+# enable natural scrolling
+exec synclient VertScrollDelta=-68
+
+#folating pop_ups
+for_window [window_role="pop_up"] floating enable
+
+
+# start a terminal
+bindsym $mod+Return exec $term
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# suspend system
+bindsym $mod+Shift+Escape exec betterlockscreen -s blur
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# reload i3 config
+bindsym $mod+F1 reload
+
+# change layout
+bindsym $mod+F2 layout toggle split
+bindsym $mod+F3 layout tabbed
+bindsym $mod+F4 layout stacking
+
+# resize mode
+bindsym $mod+F5 mode "resize"
+
+# letter key bindings {{{
+# bindsym $mod+q
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# bindsym $mod+w
+# bindsym $mod+Shift+w
+
+# bindsym $mod+e
+# bindsym $mod+Shift+e
+
+# bindsym $mod+r mode resize
+bindsym $mod+Shift+r restart
+
+# bindsym $mod+t
+# bindsym $mod+Shift+t
+
+bindsym $mod+y resize shrink width 10 px or 10 ppt
+# bindsym $mod+Shift+y
+
+bindsym $mod+u resize grow height 10 px or 10 ppt
+# bindsym $mod+Shift+u
+
+bindsym $mod+i resize shrink height 10 px or 10 ppt
+# bindsym $mod+Shift+i
+
+bindsym $mod+o resize grow width 10 px or 10 ppt
+# bindsym $mod+Shift+o
+
+# bindsym $mod+p
+# bindsym $mod+Shift+p
+
+# bindsym $mod+a
+# bindsym $mod+Shift+a
+
+bindsym --release $mod+s exec scrot -z -s ~/Screenshots/%Y-%m-%d-%T-screenshot.png
+bindsym $mod+Shift+s exec scrot -z ~/Screenshots/%Y-%m-%d-%T-screenshot.png
+
+bindsym $mod+d exec dmenu_run -fn 'SauceCodePro Nerd Font Black-14'
+# bindsym $mod+Shift+d
+
+bindsym $mod+f fullscreen toggle
+# bindsym $mod+Shift+f
+
+# bindsym $mod+g
+# bindsym $mod+Shift+g
+
+bindsym $mod+h focus left
+bindsym $mod+Shift+h move left
+
+bindsym $mod+j focus down
+bindsym $mod+Shift+j move down
+
+bindsym $mod+k focus up
+bindsym $mod+Shift+k move up
+
+bindsym $mod+l focus right
+bindsym $mod+Shift+l move right
+
+bindsym $mod+z exec playerctl previous
+# bindsym $mod+Shift+z
+
+bindsym $mod+x exec playerctl next
+bindsym $mod+Shift+x exec betterlockscreen -l blur
+
+bindsym $mod+c exec playerctl play-pause
+# bindsym $mod+Shift+c
+
+bindsym $mod+v split v
+# bindsym $mod+Shift+v
+
+bindsym $mod+b split h
+# bindsym $mod+Shift+b
+
+# bindsym $mod+n
+# bindsym $mod+Shift+n
+
+# bindsym $mod+m
+# bindsym $mod+Shift+m
+# }}}
+
+
+# split in horizontal orientation
+# bindsym $mod+b split h
+
+# split in vertical orientation
+
+# # calculator window (R instance)
+# exec --no-startup-id $term -t "math_pad" -e /usr/bin/R -q
+# for_window [title="math_pad"] floating enable,
+# for_window [title="math_pad"] resize set 800 300
+# for_window [title="math_pad"] move scratchpad
+# for_window [title="math_pad"] border pixel 2
+# bindsym $mod+a [title="math_pad"] scratchpad show, [title="math_pad"] move position center
+
+# bindsym $mod+Shift+a scratchpad show
+# for_window [title="cheat"] floating enable,
+# for_window [title="cheat"] resize set 1000 500
+# for_window [title="cheat"] move scratchpad
+# for_window [title="cheat"] border pixel 2
+# bindsym $mod+q [title="cheat"] scratchpad show, [title="cheat"] move position center
+
+
+# cheatsheet window
+# exec --no-startup-id $term -T "cheat" -e /home/poorpy/.bin/cht.sh --shell
+
+# bindsym $mod+q move scratchpad
+
+
+# arrow keys change focus/move window
+bindsym $mod+Left focus left
+bindsym $mod+Shift+Left move left
+
+bindsym $mod+Down focus down
+bindsym $mod+Shift+Down move down
+
+bindsym $mod+Up focus up
+bindsym $mod+Shift+Up move up
+
+bindsym $mod+Right focus right
+bindsym $mod+Shift+Right move right
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Multimedia Keys
+
+# volume
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
+
+# granular volume control
+bindsym $mod+XF86AudioRaiseVolume exec amixer sset Master 1%+ && pkill -RTMIN+10 i3blocks
+bindsym $mod+XF86AudioLowerVolume exec amixer sset Master 1%- && pkill -RTMIN+10 i3blocks
+
+# mute
+bindsym XF86AudioMute exec amixer sset Master toggle && pkill -RTMIN+10 i3blocks
+
+# screen brightness control
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 && pkill -RTMIN+10 i3blocks # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 && pkill -RTMIN+10 i3blocks # decrease screen brightness
