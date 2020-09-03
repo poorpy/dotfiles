@@ -3,7 +3,7 @@
 ####
 
 set $mod Mod4
-set $term alacritty
+set $term termite
 set $editor nvim
 font pango:SauceCodePro Nerd Font Black 10
 
@@ -21,16 +21,16 @@ smart_borders on
 floating_modifier $mod
 
 # define workspace names
-workspace 1 output HDMI1 HDMI-1 eDP1
-workspace 2 output HDMI1 HDMI-1 eDP1
-workspace 3 output HDMI1 HDMI-1 eDP1
-workspace 4 output HDMI1 HDMI-1 eDP1
-workspace 5 output HDMI1 HDMI-1 eDP1
-workspace 6 output HDMI1 HDMI-1 eDP1
-workspace 7 output eDP1
-workspace 8 output eDP1
-workspace 9 output eDP1
-workspace 10 output eDP1
+workspace 1 output HDMI1 HDMI-1 eDP1 DP-1 
+workspace 2 output HDMI1 HDMI-1 eDP1 DP-1
+workspace 3 output HDMI1 HDMI-1 eDP1 DP-1
+workspace 4 output HDMI1 HDMI-1 eDP1 DP-1
+workspace 5 output HDMI1 HDMI-1 eDP1 DP-1
+workspace 6 output HDMI1 HDMI-1 eDP1 DP-1
+workspace 7 output eDP1  DP-2 
+workspace 8 output eDP1  DP-2
+workspace 9 output eDP1  DP-2
+workspace 10 output eDP1 DP-2
 set $ws1 "1" 
 set $ws2 "2" 
 set $ws3 "3" 
@@ -44,12 +44,15 @@ set $ws10 "10"
 
 # i3blocks settings
 bar {
-	font pango: Source code pro 10
-        status_command i3blocks
-	position top
-	mode dock
-	tray_output primary
+    status_command i3status
 }
+# bar {
+# 	font pango: Source code pro 10
+#         status_command i3blocks
+# 	position top
+# 	mode dock
+# 	tray_output primary
+# }
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

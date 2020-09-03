@@ -1,6 +1,6 @@
 #!/bin/env zsh
 
-export EDITOR='nvr --remote'
+export EDITOR='nvr --remote -s'
 export READER='zathura'
 
 export PATH=$PATH:/home/poorpy/.bin:/home/poorpy/.cargo/bin
@@ -13,3 +13,12 @@ export PATH="$HOME:/.local/bin:$PATH"
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
+
+export PYTHONPATH="$PYTHONPATH:$HOME/git/amg/src"
+export GOPATH=$HOME/.go
+export GOROOT=$HOME/.goroot
+export GOBIN=$HOME/.gobin
+export PATH=$PATH:$GOPATH/bin:$GOBIN
+
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+

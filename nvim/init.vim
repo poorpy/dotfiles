@@ -45,7 +45,7 @@ set signcolumn=yes
 " enable 24-bit RGB
 set termguicolors
 
-" disable highlighting of searched elemnts after entering inser mode
+" disable highlighting of searched elemnts after entering insert mode
 for s:c in ['a', 'A', '<Insert>', 'i', 'I', 'gI', 'gi', 'o', 'O']
     exe 'nnoremap <silent>' . s:c . ' :nohlsearch<CR>' . s:c
 endfor
@@ -57,6 +57,9 @@ endif
 
 " close git commit window after :wq
 autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
+
+" use ripgrep instead of grep
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 " }}}
 
 " minimal keybindings {{{
@@ -110,6 +113,7 @@ call plug#begin('~/.local/share/nvim/plugged/')
   Plug 'roxma/nvim-yarp'
   Plug 'sheerun/vim-polyglot'
   Plug 'mboughaba/i3config.vim'
+  Plug 'fatih/vim-go'
 " }}}
 
 " snippets {{{
@@ -135,19 +139,34 @@ endfunction
 " }}}
 
 " movements, searching, browser {{{
-  Plug 'cloudhead/neovim-fuzzy'
+  " Plug 'cloudhead/neovim-fuzzy'
   Plug 'justinmk/vim-sneak'
   Plug 'jiangmiao/auto-pairs'
   Plug 'tyru/open-browser.vim'
   Plug 'terryma/vim-multiple-cursors'
 
 let g:sneak#label =1
-nnoremap <leader>f :FuzzyOpen<CR>
-nnoremap <leader>g :FuzzyGrep<CR>
+" fzf {{{
+  Plug 'junegunn/fzf.vim'
+let g:fzf_buffers_jump = 1
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+let g:fzf_tags_command = 'ctags -R'
+
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
+nnoremap <silent> <Leader>/ :BLines<CR>
+nnoremap <silent> <Leader>' :Marks<CR>
+nnoremap <silent> <Leader>g :Commits<CR>
+nnoremap <silent> <Leader>H :Helptags<CR>
+nnoremap <silent> <Leader>hh :History<CR>
+nnoremap <silent> <Leader>h: :History:<CR>
+nnoremap <silent> <Leader>h/ :History/<CR>
+" }}}
 " }}}
 
 " coc {{{
-  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "}}}
 
 " colorscheme, airline {{{
@@ -240,6 +259,14 @@ function! s:show_documentation()
 endfunction
 " }}}
 
+" vim-go {{{
+let g:go_def_mapping_enabled = 0
+let g:go_debug_windows = {
+      \ 'vars':       'rightbelow 60vnew',
+      \ 'stack':      'rightbelow 10new',
+\ }
+" }}}
+
 " misc commands {{{
 " set windows to equal size after window resize
 autocmd VimResized * wincmd =
@@ -247,8 +274,13 @@ autocmd VimResized * wincmd =
 " save folds after closing file
 augroup AutoSaveFolds
     autocmd!
-    autocmd BufWinLeave * mkview
-    autocmd BufWinEnter * silent! loadview
+    autocmd BufWinLeave ?* nested silent! mkview
+    autocmd BufWinEnter ?* silent! loadview
+augroup END
+
+" set syntax filetype for html files
+augroup DjangoHtml
+    autocmd BufRead,BufNewFile *.html set filetype=htmldjango 
 augroup END
 
 " set systax highlight for i3 config file
