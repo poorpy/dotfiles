@@ -3,7 +3,7 @@
 ####
 
 set $mod Mod4
-set $term alacritty
+set $term termite
 set $editor nvim
 font pango:SauceCodePro Nerd Font Black 10
 

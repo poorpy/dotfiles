@@ -110,6 +110,7 @@ call plug#begin('~/.local/share/nvim/plugged/')
   Plug 'roxma/nvim-yarp'
   Plug 'sheerun/vim-polyglot'
   Plug 'mboughaba/i3config.vim'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " }}}
 
 " snippets {{{
@@ -247,8 +248,8 @@ autocmd VimResized * wincmd =
 " save folds after closing file
 augroup AutoSaveFolds
     autocmd!
-    autocmd BufWinLeave * mkview
-    autocmd BufWinEnter * silent! loadview
+    autocmd BufWinLeave ?* mkview
+    autocmd BufWinEnter ?* silent! loadview
 augroup END
 
 " set systax highlight for i3 config file

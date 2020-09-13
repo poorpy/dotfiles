@@ -9,6 +9,8 @@ zstyle :compinstall filename '/home/poorpy/.zshrc'
 
 autoload -Uz compinit
 compinit
+autoload -U +X bashcompinit && bashcompinit
+
 # End of lines added by compinstall
 # export EDITOR='nvim'
 # export READER='zathura'
@@ -36,6 +38,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 source ~/.antigen-src/antigen.zsh
 source ~/.aliases
 source ~/.exports
+eval "$(stack --bash-completion-script stack)"
 antigen use oh-my-zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -46,6 +49,8 @@ antigen bundle rust
 antigen bundle ripgrep
 antigen bundle pip
 antigen bundle src
+antigen bundle stack
+antigen bundle golang
 antigen theme minimal
 
 antigen apply
@@ -58,3 +63,5 @@ fpath+=~/.zfunc
 
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.cabal/bin:$PATH"
 # export PATH="$HOME:/.local/bin:$PATH"
+if [ -e /home/poorpy/.nix-profile/etc/profile.d/nix.sh ]; then . /home/poorpy/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+[ -f "/home/poorpy/.ghcup/env" ] && source "/home/poorpy/.ghcup/env" # ghcup-env
