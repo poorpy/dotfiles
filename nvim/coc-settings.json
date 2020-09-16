@@ -1,4 +1,5 @@
 {
+    "pyright.openFilesOnly": true,
     "languageserver": {
         "golang": {
             "command": "gopls",
@@ -12,4 +13,5 @@
             "filetypes": ["haskell", "lhaskell"]
         }
     }
+
 }

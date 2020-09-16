@@ -12,25 +12,6 @@ compinit
 autoload -U +X bashcompinit && bashcompinit
 
 # End of lines added by compinstall
-# export EDITOR='nvim'
-# export READER='zathura'
-# (cat ~/.cache/wal/sequences &)
-# source ~/.cache/wal/colors-tty.sh
-
-# alias grep='grep --color=auto'
-# alias ls='ls --color=auto'
-# alias ll='ls -l'
-# alias vimrc='cd /home/poorpy/.config/nvim/; nvim init.vim; cd -; '
-# alias :q='exit'
-# alias cls='clear; ls'
-# alias cll='clear; ll'
-# alias gdb='gdb -quiet'
-
-
-# export PATH=$PATH:/home/poorpy/.bin:/home/poorpy/.cargo/bin
-# export PATH=$PATH:/home/poorpy/.local/bin
-# export PATH=$PATH:/home/poorpy/.emacs.d/bin
-
 
 SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
@@ -38,6 +19,8 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 source ~/.antigen-src/antigen.zsh
 source ~/.aliases
 source ~/.exports
+source ~/.pexports
+
 eval "$(stack --bash-completion-script stack)"
 antigen use oh-my-zsh
 
@@ -57,11 +40,6 @@ antigen apply
 
 fpath+=~/.zfunc
 
-# export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-# export CC=/usr/bin/clang
-# export CXX=/usr/bin/clang++
 
-# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.cabal/bin:$PATH"
-# export PATH="$HOME:/.local/bin:$PATH"
 if [ -e /home/poorpy/.nix-profile/etc/profile.d/nix.sh ]; then . /home/poorpy/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 [ -f "/home/poorpy/.ghcup/env" ] && source "/home/poorpy/.ghcup/env" # ghcup-env
