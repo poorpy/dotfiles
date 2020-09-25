@@ -110,10 +110,12 @@ call plug#begin('~/.local/share/nvim/plugged/')
 " }}}
 
 " language packs, vim frameworks {{{
+let g:polyglot_disabled = ['latex']
   Plug 'roxma/nvim-yarp'
   Plug 'sheerun/vim-polyglot'
   Plug 'mboughaba/i3config.vim'
   Plug 'fatih/vim-go'
+  Plug 'neomake/neomake'
 " }}}
 
 " snippets {{{
@@ -203,7 +205,6 @@ let g:airline_powerline_fonts = 1
 
 " latex {{{
 let g:tex_flavor = "latex"
-let g:polyglot_disabled = ['latex']
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_compiler_progname = 'nvr'
 " }}}
@@ -212,6 +213,12 @@ let g:vimtex_compiler_progname = 'nvr'
 colorscheme deep-space
 " invert matching paren highlight
 hi MatchParen guifg=#c47ebd guibg=#51617d
+" }}}
+"
+" neomake {{{
+let g:neomake_python_pylama_maker = {'args': ['--ignore=E501,E203'], }
+let g:neomake_python_pylint_maker = {'args': ['--ignore=E501,E203'], }
+call neomake#configure#automake('w')
 " }}}
 
 " coc {{{
