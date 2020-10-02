@@ -214,10 +214,11 @@ colorscheme deep-space
 " invert matching paren highlight
 hi MatchParen guifg=#c47ebd guibg=#51617d
 " }}}
-"
+
 " neomake {{{
 let g:neomake_python_pylama_maker = {'args': ['--ignore=E501,E203'], }
 let g:neomake_python_pylint_maker = {'args': ['--ignore=E501,E203'], }
+let g:neomake_open_list = 2
 call neomake#configure#automake('w')
 " }}}
 
