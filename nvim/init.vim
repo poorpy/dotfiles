@@ -98,6 +98,8 @@ inoremap jj <Esc>
 " }}}
 
 " plugins {{{ 
+let g:polyglot_disabled = ['latex']
+
 call plug#begin('~/.local/share/nvim/plugged/')
 
 " tpope {{{
@@ -203,7 +205,6 @@ let g:airline_powerline_fonts = 1
 
 " latex {{{
 let g:tex_flavor = "latex"
-let g:polyglot_disabled = ['latex']
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_compiler_progname = 'nvr'
 " }}}

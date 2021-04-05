@@ -3,7 +3,7 @@
 ####
 
 set $mod Mod4
-set $term termite
+set $term alacritty
 set $editor nvim
 font pango:SauceCodePro Nerd Font Black 10
 
@@ -90,7 +90,8 @@ exec --no-startup-id udiskie --tray
 # exec --no-startup-id compton --xrender-sync-fence -b --config ~/.compton.conf
 exec_always --no-startup-id autoxrandr
 # enable natural scrolling
-exec synclient VertScrollDelta=-68
+# exec synclient VertScrollDelta=-68
+exec xinput --set-prop 'DLL07A0:01 044E:120B' "libinput Natural Scrolling Enabled" 1
 
 #folating pop_ups
 for_window [window_role="pop_up"] floating enable
@@ -160,7 +161,8 @@ bindsym $mod+o resize grow width 10 px or 10 ppt
 bindsym --release $mod+s exec scrot -z -s ~/Screenshots/%Y-%m-%d-%T-screenshot.png
 bindsym $mod+Shift+s exec scrot -z ~/Screenshots/%Y-%m-%d-%T-screenshot.png
 
-bindsym $mod+d exec dmenu_run -fn 'SauceCodePro Nerd Font Black-14'
+bindsym $mod+d exec --no-startup-id "rofi -lines 5 -combi-modi drun,ssh,window -show drun "
+# bindsym $mod+d exec dmenu_run -fn 'SauceCodePro Nerd Font Black-14'
 # bindsym $mod+Shift+d
 
 bindsym $mod+f fullscreen toggle
