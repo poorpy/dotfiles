@@ -14,11 +14,17 @@ export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
-export PYTHONPATH="$PYTHONPATH:$HOME/git/amg/src"
 export GOPATH=$HOME/.go
-export GOROOT=$HOME/.goroot
+# export GOROOT=$HOME/.goroot
 export GOBIN=$HOME/.gobin
 export PATH=$PATH:$GOPATH/bin:$GOBIN
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
+NPM_PACKAGES="${HOME}/.npm-packages"
+
+export PATH="$PATH:$NPM_PACKAGES/bin"
+
+# Preserve MANPATH if you already defined it somewhere in your config.
+# Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"

@@ -29,6 +29,8 @@ antigen bundle ripgrep
 antigen bundle pip
 antigen bundle src
 antigen bundle golang
+antigen bundle 1995parham/buffalo.zsh
+antigen bundle gcloud
 antigen theme minimal
 
 antigen apply

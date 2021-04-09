@@ -1,5 +1,9 @@
 {
-    "pyright.openFilesOnly": true,
+    "python.analysis.useLibraryCodeForTypes": true,
+    "python.linting.pylamaEnabled": true,
+    "python.linting.pylamaArgs": ["--options", "/home/poorpy/.pylama.ini"],
+    "python.formatting.autopep8Args": ["--max-line-length", "100", "--experimental"],
+    "yank.highlight.enable": true,
     "languageserver": {
         "golang": {
             "command": "gopls",

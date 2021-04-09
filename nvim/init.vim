@@ -95,6 +95,9 @@ nnoremap <leader>n :Explore<CR>
 
 " use jj to return to normal mode 
 inoremap jj <Esc>
+
+" search highlighted text
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 " }}}
 
 " plugins {{{ 
@@ -115,7 +118,8 @@ let g:polyglot_disabled = ['latex']
   Plug 'sheerun/vim-polyglot'
   Plug 'mboughaba/i3config.vim'
   Plug 'fatih/vim-go'
-  Plug 'neomake/neomake'
+  " Plug 'neomake/neomake'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " }}}
 
 " snippets {{{
@@ -219,7 +223,7 @@ hi MatchParen guifg=#c47ebd guibg=#51617d
 let g:neomake_python_pylama_maker = {'args': ['--ignore=E501,E203'], }
 let g:neomake_python_pylint_maker = {'args': ['--ignore=E501,E203'], }
 let g:neomake_open_list = 2
-call neomake#configure#automake('w')
+" call neomake#configure#automake('w')
 " }}}
 
 " coc {{{
@@ -277,7 +281,7 @@ let g:go_debug_windows = {
 
 " misc commands {{{
 " set windows to equal size after window resize
-autocmd VimResized * wincmd =
+" autocmd VimResized * wincmd =
 
 " save folds after closing file
 augroup AutoSaveFolds
@@ -308,3 +312,9 @@ cmap w!! w !sudo tee % >/dev/null
 " format rust source file using cargo
 command! CargoFmt execute ":silent !cargo fmt"
 " }}}
+
+lua << EOF
+require('nvim-treesitter.configs').setup {
+  highlight = { enable = true },
+}
+EOF
