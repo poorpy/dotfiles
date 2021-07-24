@@ -1,5 +1,4 @@
 {
-    "pyright.openFilesOnly": true,
     "languageserver": {
         "golang": {
             "command": "gopls",
@@ -16,6 +15,17 @@
             "command": "nimlsp",
             "filetypes": ["nim"]
         }
-    }
-
+    },
+    "Lua.workspace.library": {
+        /* "/usr/share/nvim/runtime/lua/": true, */
+        /* "/usr/share/nvim/runtime/lua/lsp": true, */
+        "/usr/share/awesome/lib": true
+    },
+    "Lua.diagnostics.globals": [
+        "vim",
+        "awesome",
+        "client",
+        "screen",
+        "root"
+    ]
 }

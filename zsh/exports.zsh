@@ -10,6 +10,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME:/.local/bin:$PATH"
 export PATH="$PATH:/usr/lib/go/bin:$HOME/go/bin"
 export PATH="$PATH:$HOME/.nimble/bin"
+export PATH="$PATH:$HOME/.luarocks/bin"
 
 
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"

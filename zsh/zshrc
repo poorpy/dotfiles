@@ -1,7 +1,7 @@
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 unsetopt beep
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -19,9 +19,11 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 source ~/.antigen-src/antigen.zsh
 source ~/.aliases
 source ~/.exports
-source ~/.pexports
+if [ -f "$HOME/.pexports" ]; then 
+    source ~/.pexports
+fi
 
-eval "$(stack --bash-completion-script stack)"
+# eval "$(stack --bash-completion-script stack)"
 antigen use oh-my-zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -32,7 +34,7 @@ antigen bundle rust
 antigen bundle ripgrep
 antigen bundle pip
 antigen bundle src
-antigen bundle stack
+# antigen bundle stack
 antigen bundle golang
 antigen theme minimal
 
