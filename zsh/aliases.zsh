@@ -15,3 +15,5 @@ alias ocm-env="source ~/venv-ocm/bin/activate"
 alias clipboard='xclip -selection clipboard'
 alias primary='xclip -selection primary'
 
+alias tokiofmt="rustfmt --check --edition 2018 $(find . -name '*.rs' -print)"
+alias tokiodoc='RUSTDOCFLAGS="--cfg docsrs" cargo +nightly doc --all-features'

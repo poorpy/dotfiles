@@ -225,12 +225,12 @@ awful.screen.connect_for_each_screen(function(s)
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
+            wibox.widget.systray(),
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             volume_widget{
                 type='icon_and_text'
             },
-            wibox.widget.systray(),
             brightness_widget{
                 type = 'icon_and_text',
                 program = 'xbacklight',
