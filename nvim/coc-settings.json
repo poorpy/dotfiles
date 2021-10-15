@@ -1,8 +1,13 @@
 {
     "python.analysis.useLibraryCodeForTypes": true,
+    "python.linting.banditEnabled": true,
     "python.linting.pylamaEnabled": true,
+    "python.linting.mypyEnabled": true,
     "python.linting.pylamaArgs": ["--options", "/home/poorpy/.pylama.ini"],
     "python.formatting.autopep8Args": ["--max-line-length", "100", "--experimental"],
+    "python.formatting.provider": "black",
+    "pyright.organizeimports.provider": "isort",
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
     "yank.highlight.enable": true,
     "languageserver": {
         "golang": {

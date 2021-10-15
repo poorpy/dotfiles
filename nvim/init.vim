@@ -117,9 +117,11 @@ let g:polyglot_disabled = ['latex']
   Plug 'roxma/nvim-yarp'
   Plug 'sheerun/vim-polyglot'
   Plug 'mboughaba/i3config.vim'
-  Plug 'fatih/vim-go'
-  " Plug 'neomake/neomake'
+  Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
+  Plug 'neomake/neomake'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'Shatur/neovim-session-manager'
+  Plug 'nvim-lua/plenary.nvim'
 " }}}
 
 " snippets {{{
@@ -220,13 +222,14 @@ hi MatchParen guifg=#c47ebd guibg=#51617d
 " }}}
 
 " neomake {{{
+let g:neomake_python_enabled_makers = ['pylama']
 let g:neomake_python_pylama_maker = {'args': ['--ignore=E501,E203'], }
 let g:neomake_python_pylint_maker = {'args': ['--ignore=E501,E203'], }
 let g:neomake_open_list = 2
-" call neomake#configure#automake('w')
+call neomake#configure#automake('w')
 " }}}
 
-" coc {{{
+"" coc {{{
 " coc.nvim bindings
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -258,6 +261,15 @@ nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 
 " format code
 nnoremap <leader> F :call CocAction('format')<CR>
+
+" convert visual selected code to snippet
+xmap <leader>x <Plug>(coc-convert-snippet)
+
+" organize python imports
+autocmd FileType python nnoremap <silent> <leader>O :<C-u>CocCommand pyright.organizeimports<cr>
+
+" organize ts/js imports
+autocmd FileType typescript,javascript nnoremap <silent> <leader>O :<C-U>CocCommand tsserver.organizeImports<cr> 
 
 " fix code
 nmap <leader>qf  <Plug>(coc-fix-current)
@@ -316,5 +328,13 @@ command! CargoFmt execute ":silent !cargo fmt"
 lua << EOF
 require('nvim-treesitter.configs').setup {
   highlight = { enable = true },
-}
+};
+require('session_manager').setup({
+  sessions_dir = vim.fn.stdpath('data') .. '/sessions', -- The directory where the session files will be saved.
+  path_replacer = '__', -- The character to which the path separator will be replaced for session files.
+  colon_replacer = '++', -- The character to which the colon symbol will be replaced for session files.
+  autoload_last_session = false, -- Automatically load last session on startup is started without arguments.
+  autosave_last_session = false, -- Automatically save last session on exit.
+  autosave_ignore_paths = { '~' }, -- Folders to ignore when autosaving a session.
+})
 EOF
