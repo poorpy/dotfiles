@@ -60,6 +60,7 @@ autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 
 " use ripgrep instead of grep
 set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+
 " }}}
 
 " minimal keybindings {{{
@@ -113,15 +114,17 @@ call plug#begin('~/.local/share/nvim/plugged/')
 " }}}
 
 " language packs, vim frameworks {{{
-let g:polyglot_disabled = ['latex']
+let g:polyglot_disabled = ['latex', 'cuesheet',]
   Plug 'roxma/nvim-yarp'
   Plug 'sheerun/vim-polyglot'
   Plug 'mboughaba/i3config.vim'
-  Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
+  Plug 'jjo/vim-cue'
+  " Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
   Plug 'neomake/neomake'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'Shatur/neovim-session-manager'
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'rodjek/vim-puppet'
 " }}}
 
 " snippets {{{
@@ -226,6 +229,9 @@ let g:neomake_python_enabled_makers = ['pylama']
 let g:neomake_python_pylama_maker = {'args': ['--ignore=E501,E203'], }
 let g:neomake_python_pylint_maker = {'args': ['--ignore=E501,E203'], }
 let g:neomake_open_list = 2
+
+let blacklisted_files = ['.gitlab-ci.yml']
+autocmd! BufWritePost,BufEnter * if index(blacklisted_files, expand('%:t')) < 0 | Neomake
 call neomake#configure#automake('w')
 " }}}
 
@@ -281,6 +287,12 @@ function! s:show_documentation()
         call CocAction('doHover')
     endif
 endfunction
+
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
+autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
+autocmd FileType go nmap gty :CocCommand go.tags.add yaml<cr>
+autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 " }}}
 
 " vim-go {{{
@@ -333,8 +345,12 @@ require('session_manager').setup({
   sessions_dir = vim.fn.stdpath('data') .. '/sessions', -- The directory where the session files will be saved.
   path_replacer = '__', -- The character to which the path separator will be replaced for session files.
   colon_replacer = '++', -- The character to which the colon symbol will be replaced for session files.
+  autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
   autoload_last_session = false, -- Automatically load last session on startup is started without arguments.
   autosave_last_session = false, -- Automatically save last session on exit.
   autosave_ignore_paths = { '~' }, -- Folders to ignore when autosaving a session.
+  autosave_ignore_filetypes = { -- All buffers of these file types will be closed before the session is saved.
+    'gitcommit',
+  },
 })
 EOF

@@ -15,6 +15,7 @@ SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 
 source ~/.antigen-src/antigen.zsh
+source /usr/share/nvm/init-nvm.sh
 source ~/.aliases
 source ~/.exports
 source ~/.pexports
@@ -31,6 +32,7 @@ antigen bundle src
 antigen bundle golang
 antigen bundle 1995parham/buffalo.zsh
 antigen bundle gcloud
+antigen bundle fzf
 antigen theme minimal
 
 antigen apply
@@ -44,3 +46,6 @@ if [[ ! "$SSH_AGENT_PID" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
 fi
 
+eval "$(pyenv init -)"
+
+export PATH="$HOME/.poetry/bin:$PATH"

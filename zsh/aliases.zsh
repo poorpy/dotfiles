@@ -21,3 +21,7 @@ alias primary='xclip -selection primary'
 alias amgd='~/git/amg'
 alias minid='cd ~/git/mini'
 alias ssh='TERM=xterm-color ssh'
+
+alias vim="noglob vim"
+alias ssh="noglob ssh"
+

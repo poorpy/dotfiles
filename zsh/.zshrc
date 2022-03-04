@@ -12,20 +12,8 @@ compinit
 # End of lines added by compinstall
 export EDITOR='nvim'
 export READER='zathura'
-# export TERM='st'
 (cat ~/.cache/wal/sequences &)
 source ~/.cache/wal/colors-tty.sh
-
-# alias grep='grep --color=auto'
-# alias ls='ls --color=auto'
-# alias ll='ls -l'
-# alias vimrc='cd /home/poorpy/.config/nvim/; nvim init.vim; cd -; '
-# alias :q='exit'
-# alias cls='clear; ls'
-# alias cll='clear; ll'
-# alias gdb='gdb -quiet'
-
-# alias adm="git status | grep modified | awk '{print $NF}' | xargs git add"
 
 export PATH=$PATH:/home/poorpy/.bin:/home/poorpy/.cargo/bin
 export PATH=$PATH:/home/poorpy/.local/bin

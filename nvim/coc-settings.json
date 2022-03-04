@@ -4,17 +4,12 @@
     "python.linting.pylamaEnabled": true,
     "python.linting.mypyEnabled": true,
     "python.linting.pylamaArgs": ["--options", "/home/poorpy/.pylama.ini"],
+    "python.analysis.typeCheckingMode": "basic",
     "python.formatting.autopep8Args": ["--max-line-length", "100", "--experimental"],
     "python.formatting.provider": "black",
     "pyright.organizeimports.provider": "isort",
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
     "yank.highlight.enable": true,
-    "languageserver": {
-        "golang": {
-            "command": "gopls",
-            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-            "filetypes": ["go"]
-        }
-    }
-
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd",
+    "go.goplsUseDaemon": true
 }
