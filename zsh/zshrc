@@ -1,29 +1,23 @@
-# Lines configured by zsh-newuser-install
+# zmodload zsh/zprof
+# # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 unsetopt beep
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/poorpy/.zshrc'
+# # End of lines configured by zsh-newuser-install
+# # The following lines were added by compinstall
+# zstyle :compinstall filename '/home/poorpy/.zshrc'
 
 autoload -Uz compinit
 compinit
 autoload -U +X bashcompinit && bashcompinit
 
-# End of lines added by compinstall
-
-SCRIPT=$(readlink -f "$0")
-SCRIPTPATH=$(dirname "$SCRIPT")
+# # End of lines added by compinstall
 
 source ~/.antigen-src/antigen.zsh
 source ~/.aliases
 source ~/.exports
-if [ -f "$HOME/.pexports" ]; then 
-    source ~/.pexports
-fi
 
-# eval "$(stack --bash-completion-script stack)"
 antigen use oh-my-zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -33,21 +27,20 @@ antigen bundle systemd
 antigen bundle rust
 antigen bundle ripgrep
 antigen bundle pip
-antigen bundle src
-# antigen bundle stack
+antigen bundle fzf
 antigen bundle golang
 antigen theme minimal
 
 antigen apply
 
-fpath+=~/.zfunc
+# fpath+=~/.zfunc
 
 
 if [ -e /home/poorpy/.nix-profile/etc/profile.d/nix.sh ]; then . /home/poorpy/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 [ -f "/home/poorpy/.ghcup/env" ] && source "/home/poorpy/.ghcup/env" # ghcup-env
 
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+    ssh-agent -t 8h > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
 if [[ ! "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
