@@ -253,7 +253,7 @@ colors:
     cursor: '0xffffff'
 
   # Normal colors
-background_opacity: 1.0
+window.opacity: 1.0
 # background_opacity: 0.80
 
 #selection:
