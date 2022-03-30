@@ -21,7 +21,6 @@ source ~/.exports
 antigen use oh-my-zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle cargo
 antigen bundle git
 antigen bundle systemd
 antigen bundle rust
