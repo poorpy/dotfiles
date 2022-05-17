@@ -18,6 +18,9 @@ source ~/.antigen-src/antigen.zsh
 source ~/.aliases
 source ~/.exports
 
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
+
 antigen use oh-my-zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -26,6 +29,7 @@ antigen bundle systemd
 antigen bundle rust
 antigen bundle ripgrep
 antigen bundle pip
+antigen bundle poetry
 antigen bundle fzf
 antigen bundle golang
 antigen theme minimal
@@ -44,3 +48,5 @@ fi
 if [[ ! "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
+
+export PATH="$HOME/.poetry/bin:$PATH"

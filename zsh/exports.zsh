@@ -18,5 +18,6 @@ export PATH="$PATH:${HOME}/.local/bin"
 export PATH="$PATH:${HOME}/.yarn/bin:${HOME}/.config/yarn/global/node_modules/.bin"
 export PATH="$PATH:${HOME}/.luarocks/bin"
 export PATH="$PATH:$GOPATH/bin:$GOBIN"
+export PATH="$HOME/.pyenv/bin:$PATH"
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'

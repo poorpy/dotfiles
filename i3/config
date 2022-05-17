@@ -161,8 +161,9 @@ bindsym $mod+o resize grow width 10 px or 10 ppt
 bindsym --release $mod+s exec scrot -z -s ~/Screenshots/%Y-%m-%d-%T-screenshot.png
 bindsym $mod+Shift+s exec scrot -z ~/Screenshots/%Y-%m-%d-%T-screenshot.png
 
-bindsym $mod+d exec --no-startup-id "rofi -lines 5 -combi-modi drun,ssh,window -show drun "
+# bindsym $mod+d exec --no-startup-id "rofi -lines 5 -combi-modi drun,ssh,window -show drun "
 # bindsym $mod+d exec dmenu_run -fn 'SauceCodePro Nerd Font Black-14'
+bindsym $mod+d exec dmenu_run 
 # bindsym $mod+Shift+d
 
 bindsym $mod+f fullscreen toggle

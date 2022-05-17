@@ -112,6 +112,7 @@ call plug#begin('~/.local/share/nvim/plugged/')
 " }}}
 
 " language packs, vim frameworks {{{
+  Plug 'neomake/neomake'
   Plug 'mboughaba/i3config.vim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " }}}
@@ -172,6 +173,11 @@ nnoremap <silent> <Leader>h/ :History/<CR>
 "" }}}
 
 call plug#end()
+" }}}
+
+" neomake {{{
+call neomake#configure#automake('w')
+let g:neomake_open_list = 2
 " }}}
 
 " multiple cursors settings {{{
@@ -299,7 +305,7 @@ command! CargoFmt execute ":silent !cargo fmt"
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   highlight = {
     enable = true,              -- false will disable the whole extension
