@@ -115,11 +115,8 @@ call plug#begin('~/.local/share/nvim/plugged/')
 
 " language packs, vim frameworks {{{
 let g:polyglot_disabled = ['latex', 'cuesheet',]
-  Plug 'roxma/nvim-yarp'
-  Plug 'sheerun/vim-polyglot'
   Plug 'mboughaba/i3config.vim'
   Plug 'jjo/vim-cue'
-  " Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
   Plug 'neomake/neomake'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'Shatur/neovim-session-manager'
@@ -268,6 +265,8 @@ nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 " format code
 nnoremap <leader> F :call CocAction('format')<CR>
 
+" nnoremap <silent> <leader>O :<C-u>call CocAction('runCommand', 'editor.action.organizeImport')<CR>
+
 " convert visual selected code to snippet
 xmap <leader>x <Plug>(coc-convert-snippet)
 
@@ -276,6 +275,8 @@ autocmd FileType python nnoremap <silent> <leader>O :<C-u>CocCommand pyright.org
 
 " organize ts/js imports
 autocmd FileType typescript,javascript nnoremap <silent> <leader>O :<C-U>CocCommand tsserver.organizeImports<cr> 
+
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 " fix code
 nmap <leader>qf  <Plug>(coc-fix-current)
@@ -325,6 +326,9 @@ augroup i3config_ft
     autocmd BufRead,BufNewFile ~/.config/i3/config set filetype=i3config
 augroup END
 
+" run gofmt on save
+autocmd BufWritePost *.go silent! !gofmt -w %
+
 "enable polish spellcheck
 command! Pol execute ":set spelllang=pl spell"
 "enable english spellcheck
@@ -339,7 +343,16 @@ command! CargoFmt execute ":silent !cargo fmt"
 
 lua << EOF
 require('nvim-treesitter.configs').setup {
-  highlight = { enable = true },
+    ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    -- additional_vim_regex_highlighting = false,
+    },
 };
 require('session_manager').setup({
   sessions_dir = vim.fn.stdpath('data') .. '/sessions', -- The directory where the session files will be saved.

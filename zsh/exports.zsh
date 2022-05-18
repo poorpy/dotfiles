@@ -4,11 +4,10 @@
 export EDITOR='nvim'
 export READER='zathura'
 
-export PATH=$PATH:/home/poorpy/.bin:/home/poorpy/.cargo/bin
-export PATH=$PATH:/home/poorpy/.local/bin
-export PATH=$PATH:/home/poorpy/.emacs.d/bin
+export PATH="$PATH:$HOME/.bin:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.cabal/bin:$PATH"
-export PATH="$HOME:/.local/bin:$PATH"
 
 
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
@@ -16,7 +15,6 @@ export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
 export GOPATH=$HOME/.go
-# export GOROOT=$HOME/.goroot
 export GOBIN=$HOME/.gobin
 export PATH=$PATH:$GOBIN:$GOPATH/bin
 

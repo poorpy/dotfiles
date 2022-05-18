@@ -3,6 +3,7 @@
     "python.linting.banditEnabled": true,
     "python.linting.pylamaEnabled": true,
     "python.linting.mypyEnabled": true,
+    "python.linting.mypyArgs": ["--config-file", "mypy.ini"],
     "python.linting.pylamaArgs": ["--options", "/home/poorpy/.pylama.ini"],
     "python.analysis.typeCheckingMode": "basic",
     "python.formatting.autopep8Args": ["--max-line-length", "100", "--experimental"],

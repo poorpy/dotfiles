@@ -47,5 +47,3 @@ if [[ ! "$SSH_AGENT_PID" ]]; then
 fi
 
 eval "$(pyenv init -)"
-
-export PATH="$HOME/.poetry/bin:$PATH"
