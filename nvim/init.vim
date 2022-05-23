@@ -261,14 +261,6 @@ function! s:show_documentation()
 endfunction
 " }}}
 
-" vim-go {{{
-let g:go_def_mapping_enabled = 0
-let g:go_debug_windows = {
-      \ 'vars':       'rightbelow 60vnew',
-      \ 'stack':      'rightbelow 10new',
-\ }
-" }}}
-
 " misc commands {{{
 " set windows to equal size after window resize
 autocmd VimResized * wincmd =
@@ -301,6 +293,13 @@ cmap w!! w !sudo tee % >/dev/null
 
 " format rust source file using cargo
 command! CargoFmt execute ":silent !cargo fmt"
+
+" add missing imports in golang
+autocmd BufWritePre *.go silent! call CocAction('runCommand', 'editor.action.organizeImport')
+
+" run formmating on save in golang
+autocmd BufWritePost *.go silent! !gofmt -w %
+
 " }}}
 
 lua <<EOF
