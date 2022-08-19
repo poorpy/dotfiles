@@ -98,8 +98,6 @@ inoremap jj <Esc>
 " }}}
 
 " plugins {{{ 
-let g:polyglot_disabled = ['latex']
-
 call plug#begin('~/.local/share/nvim/plugged/')
 
 " tpope {{{
@@ -114,6 +112,7 @@ call plug#begin('~/.local/share/nvim/plugged/')
 " language packs, vim frameworks {{{
   Plug 'neomake/neomake'
   Plug 'mboughaba/i3config.vim'
+  Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " }}}
 
@@ -204,10 +203,15 @@ let g:airline_theme='deep_space'
 let g:airline_powerline_fonts = 1
 " }}}
 
+" ansible {{{
+au BufRead,BufNewFile */roles/*.yml set filetype=yaml.ansible
+" }}}
+
 " latex {{{
 let g:tex_flavor = "latex"
 let g:vimtex_view_method = 'zathura'
 let g:vimtex_compiler_progname = 'nvr'
+let g:vimtex_syntax_enabled = 0
 " }}}
 
 " colorscheme {{{
@@ -218,10 +222,24 @@ hi MatchParen guifg=#c47ebd guibg=#51617d
 
 " coc {{{
 " coc.nvim bindings
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " Use `[c` and `]c` for navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -259,6 +277,20 @@ function! s:show_documentation()
         call CocAction('doHover')
     endif
 endfunction
+
+let g:coc_filetype_map = {
+  \ 'yaml.ansible': 'ansible',
+  \ }
+" }}}
+
+" go {{{
+" organize and add missing imports on save
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
+" run gofmt on save
+autocmd BufWritePost *.go silent! !gofmt -w %
+
+let g:neomake_go_golangci_lint_args = neomake#makers#ft#go#golangci_lint().args + ['--allow-parallel-runners']
 " }}}
 
 " misc commands {{{
@@ -275,6 +307,11 @@ augroup END
 " set syntax filetype for html files
 augroup DjangoHtml
     autocmd BufRead,BufNewFile *.html set filetype=htmldjango 
+augroup END
+
+" set syntax filetype for tex files
+augroup DjangoHtml
+    autocmd BufRead,BufNewFile *.tex set filetype=latex 
 augroup END
 
 " set systax highlight for i3 config file

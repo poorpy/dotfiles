@@ -14,6 +14,7 @@ autoload -U +X bashcompinit && bashcompinit
 
 # # End of lines added by compinstall
 
+source /usr/share/nvm/init-nvm.sh
 source ~/.antigen-src/antigen.zsh
 source ~/.aliases
 source ~/.exports
@@ -38,14 +39,10 @@ antigen apply
 
 # fpath+=~/.zfunc
 
-
-if [ -e /home/poorpy/.nix-profile/etc/profile.d/nix.sh ]; then . /home/poorpy/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-[ -f "/home/poorpy/.ghcup/env" ] && source "/home/poorpy/.ghcup/env" # ghcup-env
-
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent -t 8h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
-if [[ ! "$SSH_AUTH_SOCK" ]]; then
+if [[ ! "$SSH_AUTH_SOCK" || "$SSH_AUTH_SOCK" = "$XDG_RUNTIME_DIR/ssh-agent.socket" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
 

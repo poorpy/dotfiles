@@ -3,8 +3,6 @@
 export EDITOR='nvr --remote -s'
 export READER='zathura'
 
-
-
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
