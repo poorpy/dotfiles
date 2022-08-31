@@ -14,13 +14,10 @@ autoload -U +X bashcompinit && bashcompinit
 
 # # End of lines added by compinstall
 
-source /usr/share/nvm/init-nvm.sh
+#source /usr/share/nvm/init-nvm.sh
 source ~/.antigen-src/antigen.zsh
 source ~/.aliases
 source ~/.exports
-
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
 
 antigen use oh-my-zsh
 

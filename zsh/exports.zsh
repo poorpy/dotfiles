@@ -4,8 +4,8 @@ export EDITOR='nvr --remote -s'
 export READER='zathura'
 
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-export CC=/usr/bin/clang
-export CXX=/usr/bin/clang++
+export CC=$(which clang++)
+export CXX=$(which clang++)
 
 export PYTHONPATH="$PYTHONPATH:${HOME}/git/amg/src"
 export GOPATH=$HOME/.go

@@ -114,6 +114,7 @@ call plug#begin('~/.local/share/nvim/plugged/')
   Plug 'mboughaba/i3config.vim'
   Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'lambdalisue/suda.vim'
 " }}}
 
 " snippets {{{

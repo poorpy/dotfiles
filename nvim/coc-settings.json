@@ -20,6 +20,12 @@
         "nim": {
             "command": "nimlsp",
             "filetypes": ["nim"]
+        },
+        "nix": {
+            "command": "rnix-lsp",
+            "filetypes": [
+                "nix"
+            ]
         }
     }
 }
