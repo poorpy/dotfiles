@@ -115,6 +115,7 @@ call plug#begin('~/.local/share/nvim/plugged/')
   Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'lambdalisue/suda.vim'
+  Plug 'pearofducks/ansible-vim', { 'do': './UltiSnips/generate.sh' }
 " }}}
 
 " snippets {{{
@@ -215,6 +216,11 @@ let g:vimtex_compiler_progname = 'nvr'
 let g:vimtex_syntax_enabled = 0
 " }}}
 
+" ansible {{{
+au BufRead,BufNewFile */roles/*.yml set filetype=yaml.ansible
+au BufRead,BufNewFile */inventories/*.yml set filetype=yaml.ansible
+" }}}
+
 " colorscheme {{{
 colorscheme deep-space
 " invert matching paren highlight
@@ -260,6 +266,8 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
 vmap <leader>f  <Plug>(coc-format-selected)
+
+nnoremap <silent> <leader><leader> :CocCommand editor.action.formatDocument<CR>
 " nmap <leader>f  <Plug>(coc-format-selected)
 
 " coc-yank
@@ -311,8 +319,8 @@ augroup DjangoHtml
 augroup END
 
 " set syntax filetype for tex files
-augroup DjangoHtml
-    autocmd BufRead,BufNewFile *.tex set filetype=latex 
+augroup LatexTex
+    autocmd BufRead,BufNewFile *.tex set filetype=latex
 augroup END
 
 " set systax highlight for i3 config file

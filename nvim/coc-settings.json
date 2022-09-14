@@ -10,6 +10,7 @@
     "pyright.organizeimports.provider": "isort",
     "htmldjango.djhtml.tabWidth": 2,
     "sql.database": "postgresql",
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
     "languageserver": {
         "haskell": {
             "command": "haskell-language-server-wrapper",
