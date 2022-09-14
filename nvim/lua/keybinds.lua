@@ -2,7 +2,7 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 -- set space as leader key
-map("", "<Space>", "<leader>")
+vim.g.mapleader = " "
 
 -- user alt + hjkl to switch focused split
 map("t", "<A-h>", "<C-\\><C-N><C-w>h", opts)
@@ -19,9 +19,20 @@ map("n", "<A-k>", "<C-w>k", opts)
 map("n", "<A-l>", "<C-w>l", opts)
 
 -- use alt + shift + jk to swap tabs
-map("t", "<A-J>", "<C-\\><C-N>gT")
-map("t", "<A-K>", "<C-\\><C-N>gt")
-map("i", "<A-J>", "<C-\\><C-N>gT")
-map("i", "<A-K>", "<C-\\><C-N>gt")
-map("n", "<A-J>", "gT")
-map("n", "<A-K>", "gt")
+map("t", "<A-J>", "<C-\\><C-N>gT", opts)
+map("t", "<A-K>", "<C-\\><C-N>gt", opts)
+map("i", "<A-J>", "<C-\\><C-N>gT", opts)
+map("i", "<A-K>", "<C-\\><C-N>gt", opts)
+map("n", "<A-J>", "gT", opts)
+map("n", "<A-K>", "gt", opts)
+
+-- open netrw
+map("n", "<leader>n", ":Explore<CR>", opts)
+
+-- use jj to return to normal mode
+map("i", "jj", "<Esc>", opts)
+
+-- disable search highlight after entering insert mode
+for k, v in ipairs({ "a", "A", "<Insert>", "i", "I", "gI", "gi", "o", "O" }) do 
+    map("n", v, " :noh<CR>" .. v, opts)
+end
