@@ -21,11 +21,11 @@ smart_borders on
 floating_modifier $mod
 
 # define workspace names
-workspace 1 output HDMI1 HDMI-1 DP-1 DP-2-1 eDP1 eDP-1 
-workspace 2 output HDMI1 HDMI-1 DP-1 DP-2-1 eDP1 eDP-1 
-workspace 3 output HDMI1 HDMI-1 DP-1 DP-2-1 eDP1 eDP-1 
-workspace 4 output HDMI1 HDMI-1 DP-1 DP-2-1 eDP1 eDP-1 
-workspace 5 output HDMI1 HDMI-1 DP-1 DP-2-1 eDP1 eDP-1 
+workspace 1 output HDMI1 HDMI-1 DP-1 DP-1-1 DP-2-1 eDP1 eDP-1 
+workspace 2 output HDMI1 HDMI-1 DP-1 DP-1-1 DP-2-1 eDP1 eDP-1 
+workspace 3 output HDMI1 HDMI-1 DP-1 DP-1-1 DP-2-1 eDP1 eDP-1 
+workspace 4 output HDMI1 HDMI-1 DP-1 DP-1-1 DP-2-1 eDP1 eDP-1 
+workspace 5 output HDMI1 HDMI-1 DP-1 DP-1-1 DP-2-1 eDP1 eDP-1 
 workspace 6 output HDMI1 HDMI-1 eDP1 eDP-1 
 workspace 7 output eDP1 eDP-1 DP-2 
 workspace 8 output eDP1 eDP-1 DP-2
