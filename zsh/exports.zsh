@@ -4,7 +4,7 @@ export EDITOR='nvr --remote -s'
 export READER='zathura'
 
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-export CC=$(which clang++)
+export CC=$(which clang)
 export CXX=$(which clang++)
 
 export PYTHONPATH="$PYTHONPATH:${HOME}/git/amg/src"
