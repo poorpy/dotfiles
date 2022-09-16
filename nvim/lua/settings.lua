@@ -43,6 +43,9 @@ vim.wo.signcolumn = "yes"
 -- enable 24-bit RGB
 vim.o.termguicolors = true
 
+-- use dark background
+vim.opt.background = "dark"
+
 -- use nvr as git editor in terminal buffers
 vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
 
