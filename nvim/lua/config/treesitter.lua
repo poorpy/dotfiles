@@ -22,7 +22,7 @@ M.config = {
         "typescript",
         "vim",
         "vue",
-        "yaml"
+        "yaml",
     },
     ignore_install = {},
     sync_install = true,
@@ -35,16 +35,16 @@ M.config = {
             node_incremental = "grn",
             scope_incremental = "grc",
             node_decremental = "grm",
-        }
+        },
     },
 }
 
 M.setup = function()
-	local ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
-	if not ok then
-		return
-	end
-	treesitter_configs.setup(M.config)
+    local ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
+    if not ok then
+        return
+    end
+    treesitter_configs.setup(M.config)
 end
 
 return M

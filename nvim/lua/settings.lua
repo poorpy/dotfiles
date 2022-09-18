@@ -10,7 +10,7 @@ vim.o.expandtab = true
 -- highlight cursorline
 vim.o.cursorline = true
 
--- disable swap, backup, insert prompt 
+-- disable swap, backup, insert prompt
 vim.o.swapfile = false
 vim.o.backup = false
 vim.o.writebackup = false
@@ -52,10 +52,7 @@ vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
 -- use ripgrep instead of grep
 vim.o.grepprg = "rg --vimgrep --smart-case --follow"
 
-vim.api.nvim_create_autocmd(
-    "FileType", 
-    { 
-        pattern = {"gitcommit", "gitrebase", "gitconfig"},
-        command = "set bufhidden=delete",
-    }
-)
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "gitcommit", "gitrebase", "gitconfig" },
+    command = "set bufhidden=delete",
+})
