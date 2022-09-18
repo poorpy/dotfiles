@@ -8,11 +8,44 @@ return require("packer").startup(function(use)
     use "lambdalisue/suda.vim"
 
     -- treesitter - syntax hl, ast manipulation
-    use { "nvim-treesitter/nvim-treesitter" }
+    use { 
+        "nvim-treesitter/nvim-treesitter",
+        config = function()
+            require("config.treesitter").setup()
+        end,
+        run = ":TSUpdate",
+
+    }
 
     -- statusline & icons
     use {
         "nvim-lualine/lualine.nvim",
+        config = function()
+            require("config.lualine").setup()
+        end,
         requires = { "kyazdani42/nvim-web-devicons", opt = true }
     }
+
+    use {
+        "echasnovski/mini.nvim", branch = "stable",
+        config = function()
+            require("config.mini.pairs").setup()
+            require("config.mini.comment").setup()
+            -- I currently decided to use nvim-surround
+            -- but maybe I'll switch to this in near future
+            -- require("config.mini.surround").setup()
+        end,
+    }
+
+    use {
+        "kylechui/nvim-surround",
+        config = function()
+            require("nvim-surround").setup({})
+        end
+    }
+
+    -- tpope git, better netrw, better substitution
+    use "tpope/vim-fugitive"
+    use "tpope/vim-vinegar"
+    use "tpope/vim-abolish"
 end)
