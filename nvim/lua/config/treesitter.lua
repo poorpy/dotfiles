@@ -18,6 +18,7 @@ M.config = {
         "make",
         "python",
         "rust",
+        "nix",
         "toml",
         "typescript",
         "vim",

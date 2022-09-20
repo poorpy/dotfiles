@@ -55,6 +55,15 @@ return require("packer").startup(function(use)
     use("tpope/vim-vinegar")
     use("tpope/vim-abolish")
     -- }}}
+    
+    -- better built-in terminal {{{
+	use({
+		"akinsho/nvim-toggleterm.lua",
+		config = function()
+			require("config.terminal").setup()
+		end,
+	}) 
+    -- }}} 
 
     -- LSP {{{
     use({
