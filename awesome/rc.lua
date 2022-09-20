@@ -285,10 +285,25 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 local globalkeys = gears.table.join(
-    awful.key({ Modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
-    awful.key({ Modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
+    awful.key(
+        { Modkey },
+        "s",
+        hotkeys_popup.show_help,
+        { description = "show help", group = "awesome" }
+    ),
+    awful.key(
+        { Modkey },
+        "Left",
+        awful.tag.viewprev,
+        { description = "view previous", group = "tag" }
+    ),
     awful.key({ Modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
-    awful.key({ Modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
+    awful.key(
+        { Modkey },
+        "Escape",
+        awful.tag.history.restore,
+        { description = "go back", group = "tag" }
+    ),
 
     awful.key({ Modkey }, "j", function()
         awful.client.focus.byidx(1)
@@ -313,7 +328,12 @@ local globalkeys = gears.table.join(
     awful.key({ Modkey, "Control" }, "k", function()
         awful.screen.focus_relative(-1)
     end, { description = "focus the previous screen", group = "screen" }),
-    awful.key({ Modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
+    awful.key(
+        { Modkey },
+        "u",
+        awful.client.urgent.jumpto,
+        { description = "jump to urgent client", group = "client" }
+    ),
     awful.key({ Modkey }, "Tab", function()
         awful.client.focus.history.previous()
         if client.focus then
@@ -325,8 +345,18 @@ local globalkeys = gears.table.join(
     awful.key({ Modkey }, "Return", function()
         awful.spawn(Terminal)
     end, { description = "open a terminal", group = "launcher" }),
-    awful.key({ Modkey, "Shift" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
-    awful.key({ Modkey, "Shift" }, "e", awesome.quit, { description = "quit awesome", group = "awesome" }),
+    awful.key(
+        { Modkey, "Shift" },
+        "r",
+        awesome.restart,
+        { description = "reload awesome", group = "awesome" }
+    ),
+    awful.key(
+        { Modkey, "Shift" },
+        "e",
+        awesome.quit,
+        { description = "quit awesome", group = "awesome" }
+    ),
 
     awful.key({ Modkey }, "l", function()
         awful.tag.incmwfact(0.05)
