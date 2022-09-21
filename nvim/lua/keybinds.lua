@@ -33,6 +33,6 @@ map("n", "<leader>n", ":Explore<CR>", opts)
 map("i", "jj", "<Esc>", opts)
 
 -- disable search highlight after entering insert mode
-for k, v in ipairs({ "a", "A", "<Insert>", "i", "I", "gI", "gi", "o", "O" }) do
+for _, v in ipairs({ "a", "A", "<Insert>", "i", "I", "gI", "gi", "o", "O" }) do
     map("n", v, ":noh<CR>" .. v, opts)
 end
