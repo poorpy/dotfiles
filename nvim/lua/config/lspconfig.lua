@@ -24,6 +24,7 @@ local function custom_on_attach(_, bufnr)
     buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()CR>", opts)
     buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
     buf_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    buf_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
 end
 
 local custom_capabilities = vim.lsp.protocol.make_client_capabilities()
