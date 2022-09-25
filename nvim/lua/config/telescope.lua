@@ -57,14 +57,7 @@ M.config = {
         -- },
     },
     pickers = { find_files = { hidden = true } },
-    extensions = {
-        fzf = {
-            fuzzy = true, -- false will only do exact matching
-            override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-        },
-    },
+    extensions = {},
 }
 
 M.grep_string_visual = function()
@@ -88,13 +81,7 @@ M.setup = function()
     end
     telescope.setup(M.config)
     telescope.load_extension("file_browser")
-    -- telescope.load_extension("octo")
     telescope.load_extension("live_grep_args")
-    -- telescope.load_extension("make")
-    local map = vim.api.nvim_set_keymap
-    local opts = { noremap = true, silent = true }
-    map("n", "<leader>f", ":Telescope live_grep<CR>", opts)
-    map("", "<C-f>", ":Telescope find_files<CR>", opts)
 end
 
 return M

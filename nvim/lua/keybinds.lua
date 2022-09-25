@@ -26,9 +26,6 @@ map("i", "<A-K>", "<C-\\><C-N>gt", opts)
 map("n", "<A-J>", "gT", opts)
 map("n", "<A-K>", "gt", opts)
 
--- open netrw
-map("n", "<leader>n", ":Explore<CR>", opts)
-
 -- use jj to return to normal mode
 map("i", "jj", "<Esc>", opts)
 

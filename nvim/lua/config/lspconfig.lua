@@ -24,7 +24,6 @@ local function custom_on_attach(_, bufnr)
     buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()CR>", opts)
     buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
     buf_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-    buf_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
 end
 
 local custom_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -94,9 +93,6 @@ local servers = {
             "lua",
         },
     },
-    eslint = {
-        root_dir = require("lspconfig").util.find_node_modules_ancestor,
-    },
     golangci_lint_ls = true,
     gopls = {
         flags = { allow_incremental_sync = true, debounce_text_changes = 500 },
@@ -128,20 +124,20 @@ local servers = {
     },
     html = { init_options = { provideFormatter = false } },
     jsonls = { init_options = { provideFormatter = false } },
-    ltex = {
-        autostart = false,
-        filetypes = {
-            "typescript",
-            "typescriptreact",
-            "javascript",
-            "javascriptreact",
-            "go",
-            "lua",
-            "markdown",
-            "plaintex",
-            "tex",
-        },
-    },
+    -- ltex = {
+    --     autostart = false,
+    --     filetypes = {
+    --         "typescript",
+    --         "typescriptreact",
+    --         "javascript",
+    --         "javascriptreact",
+    --         "go",
+    --         "lua",
+    --         "markdown",
+    --         "plaintex",
+    --         "tex",
+    --     },
+    -- },
     prismals = true,
     pyright = true,
     rust_analyzer = true,
@@ -244,17 +240,21 @@ lspSymbol("Info", "")
 lspSymbol("Hint", "")
 lspSymbol("Warn", "")
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
         virtual_text = true,
         signs = true,
         underline = true,
         update_in_insert = false,
         symbols = true,
-    })
+    }
+)
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-vim.lsp.handlers["textDocument/signatureHelp"] =
-    vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help,
+    { border = "single" }
+)
 
 -- suppress error messages from lang servers
 vim.notify = function(msg, log_level, _)

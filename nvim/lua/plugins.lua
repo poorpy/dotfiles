@@ -1,11 +1,19 @@
 return require("packer").startup(function(use)
     use("wbthomason/packer.nvim")
 
+    use("nvim-lua/plenary.nvim")
+
     -- colorscheme
     use("tyrannicaltoucan/vim-deep-space")
 
     -- save as root
     use("lambdalisue/suda.vim")
+
+    -- icons
+    use("kyazdani42/nvim-web-devicons")
+
+    -- better diff mode
+    use("sindrets/diffview.nvim")
 
     -- treesitter - syntax hl, ast manipulation {{{
     use({
@@ -17,13 +25,24 @@ return require("packer").startup(function(use)
     })
     -- }}}
 
-    -- statusline & icons {{{
+    -- statusline {{{
     use({
         "nvim-lualine/lualine.nvim",
         config = function()
             require("config.lualine").setup()
         end,
         requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    })
+    -- }}}
+
+    -- better movements {{{
+    use({
+        "phaazon/hop.nvim",
+        config = function()
+            require("hop").setup()
+        end,
+        branch = "v2",
+        as = "hop",
     })
     -- }}}
 
@@ -55,15 +74,34 @@ return require("packer").startup(function(use)
     use("tpope/vim-vinegar")
     use("tpope/vim-abolish")
     -- }}}
-    
+
+    -- git info {{{
+    use({
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require("config.gitsigns").setup()
+        end,
+        requires = "nvim-lua/plenary.nvim",
+    })
+    -- }}}
+
     -- better built-in terminal {{{
-	use({
-		"akinsho/nvim-toggleterm.lua",
-		config = function()
-			require("config.terminal").setup()
-		end,
-	}) 
-    -- }}} 
+    use({
+        "akinsho/nvim-toggleterm.lua",
+        config = function()
+            require("config.terminal").setup()
+        end,
+    })
+    -- }}}
+
+    -- keybinds with explanation {{{
+    use({
+        "folke/which-key.nvim",
+        config = function()
+            require("config.which-key").setup()
+        end,
+    })
+    -- }}}
 
     -- LSP {{{
     use({
@@ -111,16 +149,6 @@ return require("packer").startup(function(use)
     use({ "nvim-telescope/telescope-file-browser.nvim" })
 
     use({ "nvim-telescope/telescope-live-grep-args.nvim" })
-
-    -- FZF sorter for telescope
-    use({
-        "nvim-telescope/telescope-fzf-native.nvim",
-        config = function()
-            require("telescope").load_extension("fzf")
-        end,
-        requires = "nvim-telescope/telescope.nvim",
-        run = "make",
-    })
     -- }}}
 
     -- Go development {{{
