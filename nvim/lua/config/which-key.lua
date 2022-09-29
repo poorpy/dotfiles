@@ -125,6 +125,10 @@ local M = {
             },
         },
         mappings = {
+            ["<leader>"] = {
+                "<cmd>lua vim.lsp.buf.format()<cr>",
+                "Format file using lsp",
+            },
             ["'"] = {
                 "<cmd>1ToggleTerm size=15 direction=horizontal<cr>",
                 "Open toggle terminal",
@@ -320,7 +324,7 @@ local M = {
             },
             ["r"] = {
                 name = "Replace",
-                ["n"] = { "<cmd>Lspsage rename<CR>", "Rename symbol under cursor" },
+                ["n"] = { "<cmd>Lspsaga rename<CR>", "Rename symbol under cursor" },
             },
         },
     },
