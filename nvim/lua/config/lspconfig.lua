@@ -21,9 +21,10 @@ local function custom_on_attach(_, bufnr)
     buf_set_keymap("n", "gk", "<cmd>Lspsaga signature_help<CR>", opts)
     buf_set_keymap("n", "gR", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     buf_set_keymap("n", "gT", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-    buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()CR>", opts)
+    buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
     buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
     buf_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    buf_set_keymap("n", "<leader><leader>", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
 end
 
 local custom_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -49,11 +50,11 @@ custom_capabilities.textDocument.colorProvider = {
     dynamicRegistration = true,
 }
 
--- local black = require("config/efm/black")
+local black = require("config/efm/black")
 -- local fish = require("config/efm/fish")
 -- local flake8 = require("config/efm/flake8")
--- local isort = require("config/efm/isort")
--- local mypy = require("config/efm/mypy")
+local isort = require("config/efm/isort")
+local mypy = require("config/efm/mypy")
 -- local pgformat = require("config/efm/fish")
 -- local prettierd = require("config/efm/prettierd")
 -- local pylint = require("config/efm/pylint")
@@ -73,7 +74,7 @@ local servers = {
             rootMarkers = { ".git/" },
             languages = {
                 lua = { stylua },
-                -- python = { black, isort, mypy, flake8, pylint },
+                python = { black, isort, mypy }, -- flake8, pylint },
                 -- typescript = { prettierd },
                 -- javascript = { prettierd },
                 -- typescriptreact = { prettierd },
@@ -91,6 +92,7 @@ local servers = {
         },
         filetypes = {
             "lua",
+            "python",
         },
     },
     golangci_lint_ls = true,
@@ -247,21 +249,17 @@ lspSymbol("Info", "")
 lspSymbol("Hint", "")
 lspSymbol("Warn", "")
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    {
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         virtual_text = true,
         signs = true,
         underline = true,
         update_in_insert = false,
         symbols = true,
-    }
-)
+    })
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-    vim.lsp.handlers.signature_help,
-    { border = "single" }
-)
+vim.lsp.handlers["textDocument/signatureHelp"] =
+    vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
 
 -- suppress error messages from lang servers
 vim.notify = function(msg, log_level, _)

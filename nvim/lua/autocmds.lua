@@ -2,7 +2,7 @@ local vimrc_group = vim.api.nvim_create_augroup("vimrc", { clear = true })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Autoformat before save",
-    pattern = { "*.go", "*.lua", "*.yml", "*.json" },
+    pattern = { "*.go", "*.lua", "*.yml", "*.json", "*.py" },
     callback = function()
         vim.lsp.buf.format()
     end,
