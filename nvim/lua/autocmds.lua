@@ -2,7 +2,7 @@ local vimrc_group = vim.api.nvim_create_augroup("vimrc", { clear = true })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Autoformat before save",
-    pattern = { "*.go", "*.lua", "*.yml", "*.json", "*.py" },
+    pattern = { "*.go", "*.lua", "*.yml", "*.json", "*.py", "*.rs" },
     callback = function()
         vim.lsp.buf.format()
     end,
@@ -10,8 +10,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    desc = "Fix go imports before save",
-    pattern = { "*.go" },
+    desc = "Fix imports before save",
+    pattern = { "*.go", "*.rs" },
     callback = function()
         vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
     end,
