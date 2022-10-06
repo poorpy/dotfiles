@@ -9,6 +9,38 @@ M.setup = function()
         return
     end
 
+    local select_next_item = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            cmp.select_next_item()
+        else
+            fallback()
+        end
+    end, { "i", "s" })
+
+    local select_prev_item = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            cmp.select_prev_item()
+        else
+            fallback()
+        end
+    end, { "i", "s" })
+
+    local jump_to_next = cmp.mapping(function(fallback)
+        if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+        else
+            fallback()
+        end
+    end, { "i", "s" })
+
+    local jump_to_prev = cmp.mapping(function(fallback)
+        if luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+        else
+            fallback()
+        end
+    end, { "i", "s" })
+
     cmp.setup({
         mapping = {
             ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
@@ -20,44 +52,14 @@ M.setup = function()
             ["<CR>"] = cmp.mapping.confirm({ select = false }),
             ["<C-y>"] = cmp.config.disable,
             ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-            ["<Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-
-            ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-            ["<Down>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item()
-                elseif luasnip.expand_or_jumpable() then
-                    luasnip.expand_or_jump()
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
-
-            ["<Up>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item()
-                elseif luasnip.jumpable(-1) then
-                    luasnip.jump(-1)
-                else
-                    fallback()
-                end
-            end, { "i", "s" }),
+            ["<C-n>"] = select_next_item,
+            ["<C-p>"] = select_prev_item,
+            ["<C-j>"] = jump_to_next,
+            ["<C-k>"] = jump_to_prev,
+            ["<Tab>"] = select_next_item,
+            ["<S-Tab>"] = select_prev_item,
+            ["<Down>"] = select_next_item,
+            ["<Up>"] = select_prev_item,
         },
 
         sources = {
