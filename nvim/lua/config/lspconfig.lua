@@ -55,7 +55,7 @@ local black = require("config/efm/black")
 local isort = require("config/efm/isort")
 local mypy = require("config/efm/mypy")
 -- local pgformat = require("config/efm/fish")
--- local prettierd = require("config/efm/prettierd")
+local prettierd = require("config/efm/prettierd")
 -- local pylint = require("config/efm/pylint")
 -- local shellcheck = require("config/efm/shellcheck")
 -- local shfmt = require("config/efm/shfmt")
@@ -78,12 +78,12 @@ local servers = {
                 -- javascript = { prettierd },
                 -- typescriptreact = { prettierd },
                 -- javascriptreact = { prettierd },
-                -- yaml = { prettierd },
-                -- json = { prettierd },
-                -- html = { prettierd },
-                -- scss = { prettierd },
-                -- css = { prettierd },
-                -- markdown = { prettierd },
+                yaml = { prettierd },
+                json = { prettierd },
+                html = { prettierd },
+                scss = { prettierd },
+                css = { prettierd },
+                markdown = { prettierd },
                 -- sh = { shellcheck, shfmt },
                 -- sql = { pgformat },
                 -- fish = { fish },
@@ -92,6 +92,12 @@ local servers = {
         filetypes = {
             "lua",
             "python",
+            "yaml",
+            "json",
+            "html",
+            "scss",
+            "css",
+            "markdown",
         },
     },
     golangci_lint_ls = true,
