@@ -12,11 +12,10 @@ local function custom_on_attach(_, bufnr)
 
     local opts = { noremap = true, silent = true }
 
-    buf_set_keymap("n", "gD", "<cmd>Lspsaga preview_definition<CR>", opts)
+    buf_set_keymap("n", "gD", "<cmd>Lspsaga peek_definition<CR>", opts)
     buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
     buf_set_keymap("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", opts)
     buf_set_keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
-    buf_set_keymap("n", "gi", "<cmd>Lspsaga implement<CR>", opts)
     buf_set_keymap("n", "<C-k>", "<cmd>Lspsaga signature_help<CR>", opts)
     buf_set_keymap("n", "gR", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     buf_set_keymap("n", "gT", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
