@@ -26,7 +26,7 @@ local function custom_on_attach(_, bufnr)
 end
 
 local custom_capabilities = vim.lsp.protocol.make_client_capabilities()
-custom_capabilities = cmp_lsp.update_capabilities(custom_capabilities)
+custom_capabilities = cmp_lsp.default_capabilities(custom_capabilities)
 custom_capabilities.textDocument.completion.completionItem = {
     documentationFormat = { "markdown", "plaintext" },
     snippetSupport = true,

@@ -15,12 +15,14 @@ return require("packer").startup(function(use)
     -- better diff mode
     use("sindrets/diffview.nvim")
 
+    -- Markdown preview {{{
     use({
         "iamcco/markdown-preview.nvim",
         run = function()
             vim.fn["mkdp#util#install"]()
         end,
     })
+    -- }}}
 
     -- treesitter - syntax hl, ast manipulation {{{
     use({
@@ -202,15 +204,6 @@ return require("packer").startup(function(use)
         },
         config = function()
             require("config.cmp").setup()
-        end,
-    })
-    -- }}}
-
-    -- Markdown preview {{{
-    use({
-        "iamcco/markdown-preview.nvim",
-        run = function()
-            vim.fn["mkdp#util#install"]()
         end,
     })
     -- }}}
