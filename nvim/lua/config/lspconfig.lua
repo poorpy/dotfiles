@@ -154,7 +154,7 @@ local servers = {
             "rust-analyzer",
         },
     },
-    tailwindcss = true,
+    -- tailwindcss = true,
     stylelint_lsp = {
         autostart = false,
         cmd = {
@@ -194,8 +194,8 @@ local servers = {
             },
         },
     },
-    texlab = true,
-    yamlls = true,
+    -- texlab = true,
+    -- yamlls = true,
 }
 
 local setup_server = function(server, config)
@@ -253,17 +253,21 @@ lspSymbol("Info", "")
 lspSymbol("Hint", "")
 lspSymbol("Warn", "")
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
         virtual_text = true,
         signs = true,
         underline = true,
         update_in_insert = false,
         symbols = true,
-    })
+    }
+)
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-vim.lsp.handlers["textDocument/signatureHelp"] =
-    vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help,
+    { border = "single" }
+)
 
 -- suppress error messages from lang servers
 vim.notify = function(msg, log_level, _)

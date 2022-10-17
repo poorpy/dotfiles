@@ -15,6 +15,13 @@ return require("packer").startup(function(use)
     -- better diff mode
     use("sindrets/diffview.nvim")
 
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function()
+            vim.fn["mkdp#util#install"]()
+        end,
+    })
+
     -- treesitter - syntax hl, ast manipulation {{{
     use({
         "nvim-treesitter/nvim-treesitter",
