@@ -48,154 +48,15 @@ custom_capabilities.textDocument.colorProvider = {
     dynamicRegistration = true,
 }
 
-local black = require("config/efm/black")
--- local fish = require("config/efm/fish")
--- local flake8 = require("config/efm/flake8")
-local isort = require("config/efm/isort")
-local mypy = require("config/efm/mypy")
--- local pgformat = require("config/efm/fish")
-local prettierd = require("config/efm/prettierd")
--- local pylint = require("config/efm/pylint")
--- local shellcheck = require("config/efm/shellcheck")
--- local shfmt = require("config/efm/shfmt")
-local stylua = require("config/efm/stylua")
-
 local servers = {
     bashls = true,
     cssls = true,
     clangd = true,
     dockerls = true,
-    efm = {
-        init_options = { documentFormatting = true },
-        root_dir = vim.loop.cwd,
-        settings = {
-            rootMarkers = { ".git/" },
-            languages = {
-                lua = { stylua },
-                python = { black, isort, mypy }, -- flake8, pylint },
-                -- typescript = { prettierd },
-                -- javascript = { prettierd },
-                -- typescriptreact = { prettierd },
-                -- javascriptreact = { prettierd },
-                yaml = { prettierd },
-                json = { prettierd },
-                html = { prettierd },
-                scss = { prettierd },
-                css = { prettierd },
-                markdown = { prettierd },
-                -- sh = { shellcheck, shfmt },
-                -- sql = { pgformat },
-                -- fish = { fish },
-            },
-        },
-        filetypes = {
-            "lua",
-            "python",
-            "yaml",
-            "json",
-            "html",
-            "scss",
-            "css",
-            "markdown",
-        },
-    },
     golangci_lint_ls = true,
-    gopls = {
-        flags = { allow_incremental_sync = true, debounce_text_changes = 500 },
-        settings = {
-            gopls = {
-                analyses = {
-                    nilness = true,
-                    unusewrites = true,
-                    unusedparams = true,
-                    unreachable = true,
-                },
-                codelenses = {
-                    generate = true,
-                    gc_details = true,
-                    test = true,
-                    tidy = true,
-                },
-                usePlaceholders = true,
-                completeUnimported = true,
-                staticcheck = true,
-                matcher = "Fuzzy",
-                diagnosticsDelay = "500ms",
-                experimentalWatchedFileDelay = "100ms",
-                symbolMatcher = "fuzzy",
-                gofumpt = true,
-            },
-        },
-        filetypes = { "go", "gomod" },
-    },
     html = { init_options = { provideFormatter = false } },
     jsonls = { init_options = { provideFormatter = false } },
-    -- ltex = {
-    --     autostart = false,
-    --     filetypes = {
-    --         "typescript",
-    --         "typescriptreact",
-    --         "javascript",
-    --         "javascriptreact",
-    --         "go",
-    --         "lua",
-    --         "markdown",
-    --         "plaintex",
-    --         "tex",
-    --     },
-    -- },
-    prismals = true,
     pyright = true,
-    rust_analyzer = {
-        cmd = {
-            "rustup",
-            "run",
-            "stable",
-            "rust-analyzer",
-        },
-    },
-    -- tailwindcss = true,
-    stylelint_lsp = {
-        autostart = false,
-        cmd = {
-            "stylelint",
-        },
-    },
-    sumneko_lua = {
-        cmd = { "lua-language-server" },
-        settings = {
-            Lua = {
-                runtime = {
-                    version = "LuaJIT",
-                    path = { "lua/?.lua", "lua/?/init.lua" },
-                },
-                completion = { keywordSnippet = "Replace", callSnippet = "Replace" },
-                diagnostics = {
-                    enable = true,
-                    globals = {
-                        "vim",
-                        "describe",
-                        "it",
-                        "before_each",
-                        "after_each",
-                        "teardown",
-                        "pending",
-                        "use",
-                    },
-                    workspace = {
-                        library = {
-                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                        },
-                        maxPreload = 100000,
-                        preloadFileSize = 10000,
-                    },
-                },
-            },
-        },
-    },
-    -- texlab = true,
-    -- yamlls = true,
 }
 
 local setup_server = function(server, config)
@@ -220,27 +81,35 @@ for server, config in pairs(servers) do
     setup_server(server, config)
 end
 
--- local typescript_nvim = require("typescript")
+---split string on all occurences of separator
+---@param sep string
+---@return table<string>
+function string:split(sep)
+    local separator, fields = sep or ",", {}
+    local pattern = string.format("([^%s]+)", separator)
+    _ = self:gsub(pattern, function(c) fields[#fields + 1] = c end)
+    return fields
+end
 
--- local function disable_lsp_formatting(client)
--- 	--[[ client.resolved_capabilities.document_formatting = false ]]
--- 	--[[ client.resolved_capabilities.document_range_formatting = false ]]
--- 	--[[ client.resolved_capabilities.documentFormattingProvider = false ]]
--- 	--[[ client.resolved_capabilities.documentRangeFormattingProvider = false ]]
--- 	client.server_capabilities.document_formatting = false
--- 	client.server_capabilities.document_range_formatting = false
--- 	client.server_capabilities.documentFormattingProvider = false
--- 	client.server_capabilities.documentRangeFormattingProvider = false
--- end
+local function load_lsp()
+    local files = io.popen('find "$HOME/.config/nvim/lua/config/lsp/servers" -type f')
+    if files == nil then
+        return
+    end
 
--- typescript_nvim.setup({
--- 	server = {
--- 		on_attach = function(client, bufnr)
--- 			custom_on_attach(client, bufnr)
--- 			disable_lsp_formatting(client)
--- 		end,
--- 	},
--- })
+    for path in files:lines() do
+        local file = path:gmatch("%/lua%/(.+).lua$")():gsub("/", ".")
+        local ok, config = pcall(require, file)
+        if not ok then
+            vim.notify("Failed loading " .. file, vim.log.levels.ERROR)
+        else
+            local split = file:split(".")
+            setup_server(split[#split], config)
+        end
+    end
+end
+
+load_lsp()
 
 -- replace the default lsp diagnostic symbols
 local function lspSymbol(name, icon)
